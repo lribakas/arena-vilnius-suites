@@ -1,17 +1,23 @@
 import React, { useState, useMemo } from "react";
+// Dynamic data from DB
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { format } from "date-fns";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { events } from "@/lib/mockData";
+import { useQuery } from "@tanstack/react-query";
+import { base44 } from "@/api/base44Client";
 import { images } from "@/lib/images";
 
 const categories = ["all", "basketball", "concerts", "shows", "corporate"];
 
 export default function Events() {
+  const { data: events = [] } = useQuery({
+    queryKey: ["events-public"],
+    queryFn: () => base44.entities.Event.filter({ status: "published" }, "display_order"),
+  });
   const [category, setCategory] = useState("all");
-  const filtered = useMemo(() => category === "all" ? events : events.filter(e => e.category === category), [category]);
+  const filtered = useMemo(() => category === "all" ? events : events.filter(e => e.category === category), [category, events]);
 
   return (
     <div className="bg-[#0a0a0a] min-h-screen pt-24 pb-28">
@@ -56,7 +62,7 @@ export default function Events() {
               <Link to="/contact" className="group flex flex-col sm:flex-row bg-[#0a0a0a] hover:bg-[#0f0f0f] transition-all duration-500 overflow-hidden">
                 <div className="relative w-full sm:w-48 h-40 sm:h-auto flex-shrink-0 overflow-hidden">
                   <img
-                    src={images.events[event.category]}
+                    src={event.image || images.events[event.category] || images.hero}
                     alt={event.title}
                     className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-[1.04] transition-all duration-700 ease-out"
                   />
@@ -85,7 +91,7 @@ export default function Events() {
                   </div>
 
                   <div className="flex items-center justify-between mt-5 pt-4 border-t border-white/[0.05]">
-                    <span className="font-heading text-[9px] tracking-[0.2em] uppercase text-white/20">{event.availableSuites.length} suites available</span>
+                    <span className="font-heading text-[9px] tracking-[0.2em] uppercase text-white/20">{(event.available_suites || []).length} suites available</span>
                     <div className="flex items-center gap-1.5 font-heading text-[10px] tracking-[0.18em] uppercase text-white/25 group-hover:text-white/60 group-hover:gap-2.5 transition-all duration-300">
                       Book Suite
                       <ArrowRight className="w-3 h-3" />

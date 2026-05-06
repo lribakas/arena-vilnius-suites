@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Users, Check, ArrowLeft, ArrowRight, Car, UtensilsCrossed, DoorOpen, Wifi } from "lucide-react";
@@ -8,11 +8,15 @@ import { images } from "@/lib/images";
 
 export default function SuiteDetail() {
   const { id } = useParams();
-  const { data: suites = [] } = useQuery({
+  const { data: suites = [], isLoading } = useQuery({
     queryKey: ["suites-public"],
     queryFn: () => base44.entities.Suite.filter({ status: "published" }),
   });
   const suite = suites.find((s) => s.id === id);
+
+  if (isLoading) {
+    return <div className="pt-32 pb-24 text-center px-6 bg-[#0a0a0a]"><div className="w-5 h-5 border border-white/10 border-t-white/40 rounded-full animate-spin mx-auto" /></div>;
+  }
 
   if (!suite) {
     return (

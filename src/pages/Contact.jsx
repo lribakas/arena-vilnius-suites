@@ -7,24 +7,36 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { suites, events } from "@/lib/mockData";
+import { useQuery } from "@tanstack/react-query";
+import { base44 } from "@/api/base44Client";
 
 const inputClass = "bg-[#0d0d0d] border-white/[0.08] text-white/80 placeholder:text-white/18 focus:border-white/25 focus:ring-0 rounded-none text-sm font-light h-11";
 
 export default function Contact() {
+  const { data: suites = [] } = useQuery({ queryKey: ["suites-public"], queryFn: () => base44.entities.Suite.filter({ status: "published" }, "display_order") });
+  const { data: events = [] } = useQuery({ queryKey: ["events-public"], queryFn: () => base44.entities.Event.filter({ status: "published" }, "display_order") });
   const [form, setForm] = useState({ name:"", company:"", email:"", phone:"", event:"", suite:"", guests:"", message:"" });
   const [sending, setSending] = useState(false);
 
   const set = (field, value) => setForm(p => ({ ...p, [field]: value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
-      toast.success("Inquiry sent. Our team will respond within 24 hours.");
-      setForm({ name:"", company:"", email:"", phone:"", event:"", suite:"", guests:"", message:"" });
-    }, 1400);
+    await base44.entities.Inquiry.create({
+      name: form.name,
+      company: form.company,
+      email: form.email,
+      phone: form.phone,
+      suite_id: form.suite,
+      event_id: form.event,
+      guests: form.guests,
+      message: form.message,
+      status: "new",
+    });
+    setSending(false);
+    toast.success("Inquiry sent. Our team will respond within 24 hours.");
+    setForm({ name:"", company:"", email:"", phone:"", event:"", suite:"", guests:"", message:"" });
   };
 
   return (
@@ -72,6 +84,7 @@ export default function Contact() {
                       </SelectTrigger>
                       <SelectContent className="bg-[#0d0d0d] border-white/[0.08] rounded-none">
                         {events.map(e => <SelectItem key={e.id} value={e.id} className="text-white/50 text-xs focus:bg-white/5 focus:text-white rounded-none">{e.title}</SelectItem>)}
+                        {events.length === 0 && <SelectItem value="_" disabled className="text-white/20 text-xs rounded-none">No events available</SelectItem>}
                       </SelectContent>
                     </Select>
                   </div>
@@ -84,6 +97,7 @@ export default function Contact() {
                       </SelectTrigger>
                       <SelectContent className="bg-[#0d0d0d] border-white/[0.08] rounded-none">
                         {suites.map(s => <SelectItem key={s.id} value={s.id} className="text-white/50 text-xs focus:bg-white/5 focus:text-white rounded-none">{s.name}</SelectItem>)}
+                        {suites.length === 0 && <SelectItem value="_" disabled className="text-white/20 text-xs rounded-none">No suites available</SelectItem>}
                       </SelectContent>
                     </Select>
                   </div>
