@@ -9,7 +9,11 @@ import { base44 } from "@/api/base44Client";
 import { images } from "@/lib/images";
 
 export default function UpcomingEvents() {
-  const featured = events.slice(0, 3);
+  const { data: allEvents = [] } = useQuery({
+    queryKey: ["events-public"],
+    queryFn: () => base44.entities.Event.filter({ status: "published" }, "display_order", 3),
+  });
+  const featured = allEvents.slice(0, 3);
 
   return (
     <section className="py-28" style={{ background: "#0d0d0d" }}>
@@ -36,7 +40,7 @@ export default function UpcomingEvents() {
                 {/* Image */}
                 <div className="relative w-full sm:w-36 h-24 flex-shrink-0 overflow-hidden">
                   <img
-                    src={images.events[event.category]}
+                    src={event.image || images.events[event.category] || images.hero}
                     alt={event.title}
                     className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-[1.04] transition-all duration-700 ease-out"
                   />
@@ -48,7 +52,7 @@ export default function UpcomingEvents() {
                   <div className="flex items-center gap-3 mb-2">
                     <span className="font-heading text-[9px] tracking-[0.3em] uppercase text-white/25 font-medium">{event.category}</span>
                     <span className="w-px h-3 bg-white/10" />
-                    <span className="font-heading text-[9px] tracking-[0.2em] uppercase text-white/18">{event.availableSuites.length} suites</span>
+                    <span className="font-heading text-[9px] tracking-[0.2em] uppercase text-white/18">{(event.available_suites || []).length} suites</span>
                   </div>
                   <h3 className="font-heading font-semibold text-white text-[15px] tracking-tight truncate">{event.title}</h3>
                 </div>
