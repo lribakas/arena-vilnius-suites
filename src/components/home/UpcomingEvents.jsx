@@ -19,9 +19,9 @@ export default function UpcomingEvents() {
     <section className="py-28" style={{ background: "#0d0d0d" }}>
       <div className="max-w-7xl mx-auto px-8">
         <SectionHeading
-          label="Upcoming Events"
-          title="What's Coming"
-          subtitle="Discover the biggest events at Arena Vilnius and secure your premium hospitality experience."
+          label="Artimiausi renginiai"
+          title="Mėgaukitės pramogomis arenoje"
+          subtitle="Rinkitės tarp daugybės skirtingų sporto, koncertų ar kitų renginių."
         />
 
         <div className="divide-y divide-white/[0.05]">
@@ -75,7 +75,7 @@ export default function UpcomingEvents() {
             to="/events"
             className="inline-flex items-center gap-3 border border-white/10 text-white/40 font-heading text-[10px] tracking-[0.2em] uppercase px-8 py-3.5 hover:border-white/25 hover:text-white/70 transition-all duration-400"
           >
-            Browse All Events
+            Visi renginiai
             <ArrowRight className="w-3 h-3" />
           </Link>
         </motion.div>
