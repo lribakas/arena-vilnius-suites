@@ -56,7 +56,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="font-heading text-[9px] tracking-[0.5em] uppercase text-white/22 mt-6 font-light"
         >
-          Suites & VIP Experiences
+          Ložės ir VIP patirtys
         </motion.p>
 
         {/* Subheadline */}
@@ -66,8 +66,8 @@ export default function HeroSection() {
           transition={{ duration: 0.9, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
           className="text-white/40 text-sm leading-relaxed max-w-sm mt-8 mb-10 font-light"
         >
-          Private suites, premium seating, and world-class hospitality
-          for concerts, sports, and corporate events.
+          Privačios ložės, premium vietos ir aukščiausio lygio patirtis
+          koncertų, sporto bei verslo renginių metu
         </motion.p>
 
         {/* CTAs */}
