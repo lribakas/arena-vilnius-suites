@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { images } from "@/lib/images";
 
 const navLinks = [
-  { label: "Suites", path: "/suites" },
-  { label: "Events", path: "/events" },
-  { label: "Contact", path: "/contact" },
+  { label: "Ložės", path: "/suites" },
+  { label: "Renginiai", path: "/events" },
+  { label: "Kontaktai", path: "/contact" },
 ];
 
 export default function Navbar() {
@@ -57,7 +57,7 @@ export default function Navbar() {
             to="/contact"
             className="font-heading text-xs font-semibold tracking-[0.18em] uppercase bg-white text-[#0a0a0a] px-6 py-2.5 hover:bg-white/90 transition-all duration-300"
           >
-            Book Now
+            Užsisakyti dabar
           </Link>
         </div>
 
@@ -85,7 +85,7 @@ export default function Navbar() {
               ))}
               <Link to="/contact"
                 className="block text-center font-heading text-xs font-semibold tracking-[0.2em] uppercase bg-white text-[#0a0a0a] py-3.5 mt-4">
-                Book Now
+                Užsisakyti dabar
               </Link>
             </div>
           </motion.div>
