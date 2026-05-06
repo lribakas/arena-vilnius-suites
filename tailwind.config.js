@@ -65,6 +65,10 @@ module.exports = {
   				ring: 'hsl(var(--sidebar-ring))'
   			}
   		},
+      letterSpacing: {
+        widest: '0.25em',
+        'ultra-wide': '0.4em',
+      },
   		keyframes: {
   			'accordion-down': {
   				from: { height: '0' },

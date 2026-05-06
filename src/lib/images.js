@@ -13,5 +13,6 @@ export const images = {
     concerts: "https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/964ff4dc0_generated_9af9db69.png",
     shows: "https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/9b296c8e9_generated_7a290a5b.png",
     corporate: "https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/8ba15dd41_generated_ff0b948f.png",
-  }
+  },
+  logo: "https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/84a1c3c16_generated_image.png",
 };

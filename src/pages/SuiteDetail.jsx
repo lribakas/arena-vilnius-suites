@@ -11,118 +11,113 @@ export default function SuiteDetail() {
 
   if (!suite) {
     return (
-      <div className="pt-32 pb-24 text-center px-6">
-        <h2 className="font-heading text-2xl text-foreground mb-4">Suite Not Found</h2>
-        <Link to="/suites" className="text-primary">Back to Suites</Link>
+      <div className="pt-32 pb-24 text-center px-6 bg-black">
+        <h2 className="font-heading font-bold text-2xl text-white mb-4">Suite Not Found</h2>
+        <Link to="/suites" className="text-primary hover:text-primary/80">Back to Suites</Link>
       </div>
     );
   }
 
   return (
-    <div className="pt-20 pb-24">
+    <div className="pt-20 pb-24 bg-black">
       {/* Hero */}
-      <div className="relative h-[50vh] min-h-[400px] overflow-hidden">
+      <div className="relative h-[55vh] min-h-[420px] overflow-hidden">
         <img
           src={images.suites[suite.id]}
           alt={suite.name}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+        {/* Red accent line at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-primary/80 via-primary/40 to-transparent" />
+
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 max-w-7xl mx-auto">
           <Link
             to="/suites"
-            className="inline-flex items-center gap-2 text-muted-foreground text-sm hover:text-foreground transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-white/40 text-xs font-heading font-semibold uppercase tracking-widest hover:text-white transition-colors mb-5"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Suites
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Suites
           </Link>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="text-primary text-xs uppercase tracking-[0.3em] mb-2">{suite.tagline}</p>
-            <h1 className="font-heading text-3xl md:text-5xl text-foreground">{suite.name}</h1>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <p className="text-primary text-[10px] font-heading font-semibold uppercase tracking-[0.35em] mb-2">{suite.tagline}</p>
+            <h1 className="font-heading font-bold text-4xl md:text-6xl text-white tracking-tight">{suite.name}</h1>
           </motion.div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto px-6 mt-14">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <h2 className="font-heading text-2xl text-foreground mb-4">Overview</h2>
-              <p className="text-muted-foreground leading-relaxed">{suite.description}</p>
+          <div className="lg:col-span-2 space-y-12">
+            {/* Overview */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-6 h-px bg-primary" />
+                <h2 className="font-heading font-bold text-lg text-white uppercase tracking-widest">Overview</h2>
+              </div>
+              <p className="text-white/50 leading-relaxed">{suite.description}</p>
             </motion.div>
 
-            {/* Features */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <h2 className="font-heading text-2xl text-foreground mb-6">Features & Amenities</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {suite.features.map((f) => (
-                  <div key={f} className="flex items-center gap-3 glass-card rounded-lg px-4 py-3">
-                    <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80 text-sm">{f}</span>
+            {/* Quick highlights */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/5">
+                {[
+                  { icon: Users, label: "Capacity", value: suite.capacity },
+                  { icon: Car, label: "VIP Parking", value: "Included" },
+                  { icon: DoorOpen, label: "Entrance", value: "Private" },
+                  { icon: Wifi, label: "WiFi", value: "Included" },
+                ].map(({ icon: Icon, label, value }) => (
+                  <div key={label} className="bg-card p-6 text-center">
+                    <Icon className="w-4 h-4 text-primary mx-auto mb-2" />
+                    <p className="text-white/40 text-[10px] uppercase tracking-widest font-heading mb-1">{label}</p>
+                    <p className="text-white text-sm font-heading font-semibold">{value}</p>
                   </div>
                 ))}
               </div>
             </motion.div>
 
-            {/* Included */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <h2 className="font-heading text-2xl text-foreground mb-6">What's Included</h2>
+            {/* Features */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-6 h-px bg-primary" />
+                <h2 className="font-heading font-bold text-lg text-white uppercase tracking-widest">Features & Amenities</h2>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5">
+                {suite.features.map((f) => (
+                  <div key={f} className="flex items-center gap-3 bg-card px-5 py-4">
+                    <Check className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <span className="text-white/60 text-sm">{f}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* What's Included */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-6 h-px bg-primary" />
+                <h2 className="font-heading font-bold text-lg text-white uppercase tracking-widest">What's Included</h2>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {suite.included.map((item) => (
                   <div key={item} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3 h-3 text-primary" />
-                    </div>
-                    <span className="text-foreground/80 text-sm">{item}</span>
+                    <div className="w-1.5 h-1.5 bg-primary flex-shrink-0" />
+                    <span className="text-white/50 text-sm">{item}</span>
                   </div>
                 ))}
               </div>
             </motion.div>
 
             {/* Catering */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <h2 className="font-heading text-2xl text-foreground mb-4">Catering</h2>
-              <div className="glass-card rounded-xl p-6 flex items-start gap-4">
-                <UtensilsCrossed className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                <p className="text-muted-foreground text-sm leading-relaxed">{suite.catering}</p>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-6 h-px bg-primary" />
+                <h2 className="font-heading font-bold text-lg text-white uppercase tracking-widest">Catering</h2>
               </div>
-            </motion.div>
-
-            {/* Quick Highlights */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {[
-                  { icon: Users, label: "Capacity", value: suite.capacity },
-                  { icon: Car, label: "VIP Parking", value: "Included" },
-                  { icon: DoorOpen, label: "Private Entrance", value: "Yes" },
-                  { icon: Wifi, label: "High-Speed WiFi", value: "Included" },
-                ].map(({ icon: Icon, label, value }) => (
-                  <div key={label} className="glass-card rounded-xl p-5 text-center">
-                    <Icon className="w-5 h-5 text-primary mx-auto mb-2" />
-                    <p className="text-xs text-muted-foreground mb-1">{label}</p>
-                    <p className="text-foreground text-sm font-medium">{value}</p>
-                  </div>
-                ))}
+              <div className="bg-card border-l-2 border-primary px-6 py-5 flex items-start gap-4">
+                <UtensilsCrossed className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                <p className="text-white/50 text-sm leading-relaxed">{suite.catering}</p>
               </div>
             </motion.div>
           </div>
@@ -135,38 +130,39 @@ export default function SuiteDetail() {
               transition={{ delay: 0.3 }}
               className="lg:sticky lg:top-28"
             >
-              <div className="glass-card rounded-xl p-8 border border-primary/10">
-                <h3 className="font-heading text-xl text-foreground mb-2">{suite.name}</h3>
-                <p className="text-gradient-gold text-2xl font-heading mb-6">{suite.price}</p>
+              <div className="bg-card border border-white/8">
+                {/* Top accent */}
+                <div className="h-0.5 bg-primary w-full" />
+                <div className="p-8">
+                  <p className="text-primary text-[10px] font-heading font-semibold uppercase tracking-[0.3em] mb-1">{suite.tagline}</p>
+                  <h3 className="font-heading font-bold text-2xl text-white mb-2">{suite.name}</h3>
+                  <p className="font-heading font-bold text-3xl text-primary mb-8">{suite.price}</p>
 
-                <div className="space-y-3 mb-8">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Capacity</span>
-                    <span className="text-foreground">{suite.capacity}</span>
+                  <div className="space-y-4 mb-8 border-y border-white/5 py-6">
+                    {[
+                      { label: "Capacity", value: suite.capacity },
+                      { label: "Catering", value: "Included" },
+                      { label: "Parking", value: "VIP Included" },
+                    ].map(item => (
+                      <div key={item.label} className="flex justify-between text-sm">
+                        <span className="text-white/40">{item.label}</span>
+                        <span className="text-white font-medium">{item.value}</span>
+                      </div>
+                    ))}
                   </div>
-                  <div className="border-b border-border" />
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Event Types</span>
-                    <span className="text-foreground capitalize">{suite.eventTypes.join(", ")}</span>
-                  </div>
-                  <div className="border-b border-border" />
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Catering</span>
-                    <span className="text-foreground">Included</span>
-                  </div>
+
+                  <Link
+                    to="/contact"
+                    className="group flex items-center justify-center gap-3 w-full bg-primary text-white py-4 text-sm font-heading font-semibold tracking-widest uppercase hover:bg-primary/90 transition-all duration-300"
+                  >
+                    Request Proposal
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+
+                  <p className="text-[11px] text-white/30 text-center mt-4">
+                    Response within 24 hours
+                  </p>
                 </div>
-
-                <Link
-                  to="/contact"
-                  className="group flex items-center justify-center gap-2 w-full bg-primary text-primary-foreground py-4 rounded-lg text-sm font-medium hover:bg-primary/90 transition-all duration-300"
-                >
-                  Request Proposal
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-
-                <p className="text-xs text-muted-foreground text-center mt-4">
-                  Our team will respond within 24 hours
-                </p>
               </div>
             </motion.div>
           </div>

@@ -10,26 +10,26 @@ export default function FeaturedSuites() {
   const featured = suites.slice(0, 3);
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-28 px-6 bg-black">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
           label="Our Suites"
           title="Exceptional Spaces"
-          subtitle="Each suite is designed to deliver an unmatched hospitality experience with breathtaking views and impeccable service."
+          subtitle="Each suite delivers an unmatched hospitality experience with breathtaking arena views and impeccable service."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
           {featured.map((suite, i) => (
             <motion.div
               key={suite.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
+              transition={{ duration: 0.6, delay: i * 0.12 }}
             >
               <Link
                 to={`/suites/${suite.id}`}
-                className="group block glass-card glass-card-hover rounded-xl overflow-hidden transition-all duration-500"
+                className="group block bg-card overflow-hidden hover:bg-white/[0.04] transition-all duration-500"
               >
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -37,23 +37,25 @@ export default function FeaturedSuites() {
                     alt={suite.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-primary text-xs uppercase tracking-widest">{suite.tagline}</span>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                  {/* Red line on hover */}
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-500" />
                 </div>
                 <div className="p-6">
-                  <h3 className="font-heading text-xl text-foreground mb-2">{suite.name}</h3>
+                  <p className="text-primary text-[10px] font-heading font-semibold uppercase tracking-[0.3em] mb-2">
+                    {suite.tagline}
+                  </p>
+                  <h3 className="font-heading font-bold text-xl text-white mb-3">{suite.name}</h3>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                    <div className="flex items-center gap-2 text-white/40 text-sm">
                       <Users className="w-4 h-4" />
                       <span>{suite.capacity}</span>
                     </div>
-                    <span className="text-primary text-sm font-medium">{suite.price}</span>
+                    <span className="text-primary text-sm font-semibold">{suite.price}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-primary text-sm font-medium mt-4 group-hover:gap-3 transition-all">
-                    <span>View Details</span>
-                    <ArrowRight className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-white/50 text-sm font-medium mt-5 group-hover:text-white group-hover:gap-3 transition-all duration-300">
+                    <span className="text-xs tracking-widest uppercase font-heading">View Details</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </Link>
@@ -69,7 +71,7 @@ export default function FeaturedSuites() {
         >
           <Link
             to="/suites"
-            className="inline-flex items-center gap-2 text-primary text-sm tracking-wide hover:gap-3 transition-all duration-300"
+            className="inline-flex items-center gap-2 border border-white/10 text-white/60 text-sm font-heading font-semibold uppercase tracking-widest px-8 py-3 hover:border-white/30 hover:text-white transition-all duration-300"
           >
             View All Suites
             <ArrowRight className="w-4 h-4" />

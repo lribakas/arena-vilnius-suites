@@ -11,49 +11,53 @@ export default function UpcomingEvents() {
   const featured = events.slice(0, 3);
 
   return (
-    <section className="py-24 px-6 bg-card/50">
+    <section className="py-28 px-6" style={{ background: "hsl(0 0% 6%)" }}>
       <div className="max-w-7xl mx-auto">
         <SectionHeading
           label="Upcoming Events"
           title="What's Coming"
-          subtitle="Discover the biggest events at Arena Vilnius and secure your premium experience."
+          subtitle="Discover the biggest events at Arena Vilnius and secure your premium hospitality experience."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="space-y-px bg-white/5">
           {featured.map((event, i) => (
             <motion.div
               key={event.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <Link
                 to="/events"
-                className="group block glass-card glass-card-hover rounded-xl overflow-hidden transition-all duration-500"
+                className="group flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 bg-card px-6 py-5 hover:bg-white/[0.04] transition-all duration-300"
               >
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative w-full sm:w-40 h-28 sm:h-20 flex-shrink-0 overflow-hidden">
                   <img
                     src={images.events[event.category]}
                     alt={event.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full capitalize backdrop-blur-sm border border-primary/20">
+                  <div className="absolute inset-y-0 left-0 w-0.5 bg-primary" />
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-3 mb-1.5">
+                    <span className="text-primary text-[10px] font-heading font-semibold uppercase tracking-[0.25em]">
                       {event.category}
                     </span>
+                    <span className="text-white/20 text-xs">·</span>
+                    <span className="text-white/40 text-xs">{event.availableSuites.length} suites available</span>
                   </div>
+                  <h3 className="font-heading font-bold text-white text-base truncate">{event.title}</h3>
                 </div>
-                <div className="p-6">
-                  <h3 className="font-heading text-lg text-foreground mb-3 line-clamp-2">{event.title}</h3>
-                  <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                    <Calendar className="w-4 h-4" />
-                    <span>{format(new Date(event.date), "MMM d, yyyy")} · {event.time}</span>
+
+                <div className="flex items-center gap-6 flex-shrink-0">
+                  <div className="flex items-center gap-2 text-white/40 text-sm">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>{format(new Date(event.date), "MMM d, yyyy")}</span>
                   </div>
-                  <div className="text-sm text-muted-foreground mt-2">
-                    {event.availableSuites.length} suites available
-                  </div>
+                  <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
                 </div>
               </Link>
             </motion.div>
@@ -68,7 +72,7 @@ export default function UpcomingEvents() {
         >
           <Link
             to="/events"
-            className="inline-flex items-center gap-2 text-primary text-sm tracking-wide hover:gap-3 transition-all duration-300"
+            className="inline-flex items-center gap-2 border border-white/10 text-white/60 text-sm font-heading font-semibold uppercase tracking-widest px-8 py-3 hover:border-white/30 hover:text-white transition-all duration-300"
           >
             Browse All Events
             <ArrowRight className="w-4 h-4" />

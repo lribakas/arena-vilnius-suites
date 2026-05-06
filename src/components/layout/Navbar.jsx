@@ -4,7 +4,6 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "Home", path: "/" },
   { label: "Suites", path: "/suites" },
   { label: "Events", path: "/events" },
   { label: "Contact", path: "/contact" },
@@ -29,30 +28,28 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/90 backdrop-blur-xl border-b border-border/50 py-3"
+          ? "bg-black/95 backdrop-blur-xl border-b border-white/5 py-3"
           : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center">
-            <span className="text-primary font-heading font-bold text-sm">A</span>
-          </div>
-          <div className="font-heading text-lg tracking-wide">
-            <span className="text-foreground">Arena Vilnius</span>
-            <span className="text-primary ml-1">Suites</span>
-          </div>
+        {/* Logo */}
+        <Link to="/" className="flex flex-col leading-none select-none">
+          <span className="font-heading text-[10px] tracking-[0.35em] text-white/60 uppercase font-medium">Arena</span>
+          <span className="font-heading text-xl font-bold tracking-tight text-white leading-none">VILNIUS</span>
+          <span className="font-heading text-[9px] tracking-[0.2em] text-primary uppercase font-medium mt-0.5">Suites</span>
         </Link>
 
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              className={`text-sm tracking-wide transition-colors duration-300 ${
+              className={`text-sm font-medium tracking-wide transition-colors duration-300 ${
                 location.pathname === link.path
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-white"
+                  : "text-white/50 hover:text-white"
               }`}
             >
               {link.label}
@@ -60,14 +57,15 @@ export default function Navbar() {
           ))}
           <Link
             to="/contact"
-            className="text-sm bg-primary text-primary-foreground px-5 py-2.5 rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium"
+            className="text-sm bg-primary text-white px-6 py-2.5 font-medium tracking-wide hover:bg-primary/90 transition-all duration-300"
+            style={{ clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)" }}
           >
-            Request Proposal
+            Book Now
           </Link>
         </div>
 
         <button
-          className="md:hidden text-foreground"
+          className="md:hidden text-white/80 hover:text-white"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -80,17 +78,15 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border"
+            className="md:hidden bg-black/98 backdrop-blur-xl border-b border-white/5"
           >
-            <div className="px-6 py-6 space-y-4">
+            <div className="px-6 py-8 space-y-5">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`block text-base ${
-                    location.pathname === link.path
-                      ? "text-primary"
-                      : "text-muted-foreground"
+                  className={`block text-base font-medium tracking-wide ${
+                    location.pathname === link.path ? "text-white" : "text-white/50"
                   }`}
                 >
                   {link.label}
@@ -98,9 +94,9 @@ export default function Navbar() {
               ))}
               <Link
                 to="/contact"
-                className="block text-center bg-primary text-primary-foreground px-5 py-3 rounded-lg font-medium mt-4"
+                className="block text-center bg-primary text-white py-3 text-sm font-medium tracking-wide mt-4"
               >
-                Request Proposal
+                Book Now
               </Link>
             </div>
           </motion.div>
