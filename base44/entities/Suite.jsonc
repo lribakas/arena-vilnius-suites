@@ -1,0 +1,129 @@
+{
+  "name": "Suite",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Suite name"
+    },
+    "tagline": {
+      "type": "string",
+      "description": "Short subheadline"
+    },
+    "description": {
+      "type": "string",
+      "description": "Full description"
+    },
+    "image": {
+      "type": "string",
+      "description": "Main image URL"
+    },
+    "gallery": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Gallery image URLs"
+    },
+    "capacity": {
+      "type": "string",
+      "description": "Capacity label e.g. 20-30 guests"
+    },
+    "capacity_num": {
+      "type": "number",
+      "description": "Max capacity number for filtering"
+    },
+    "price": {
+      "type": "string",
+      "description": "Price label e.g. From \u20ac5,000"
+    },
+    "price_num": {
+      "type": "number",
+      "description": "Starting price number for filtering"
+    },
+    "event_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Applicable event types"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Features & amenities list"
+    },
+    "included": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Included services list"
+    },
+    "catering": {
+      "type": "string",
+      "description": "Catering description"
+    },
+    "parking": {
+      "type": "string",
+      "description": "Parking information"
+    },
+    "entrance": {
+      "type": "string",
+      "description": "Entrance information"
+    },
+    "cta_text": {
+      "type": "string",
+      "description": "CTA button text",
+      "default": "Request Proposal"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "published",
+        "draft"
+      ],
+      "default": "draft",
+      "description": "Visibility status"
+    },
+    "display_order": {
+      "type": "number",
+      "description": "Display order on public pages",
+      "default": 0
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -2,22 +2,29 @@ import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SuiteCard from "@/components/suites/SuiteCard";
-import { suites } from "@/lib/mockData";
+import { useQuery } from "@tanstack/react-query";
+import { base44 } from "@/api/base44Client";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 
 export default function Suites() {
+  const { data: suitesData = [] } = useQuery({
+    queryKey: ["suites-public"],
+    queryFn: () => base44.entities.Suite.filter({ status: "published" }, "display_order"),
+  });
+  const suites = suitesData;
+
   const [capacityFilter, setCapacityFilter] = useState("all");
   const [eventFilter, setEventFilter] = useState("all");
   const [priceRange, setPriceRange] = useState([0, 10000]);
 
   const filtered = useMemo(() => {
     return suites.filter((s) => {
-      if (capacityFilter === "small" && s.capacityNum > 10) return false;
-      if (capacityFilter === "medium" && (s.capacityNum <= 10 || s.capacityNum > 20)) return false;
-      if (capacityFilter === "large" && s.capacityNum <= 20) return false;
-      if (eventFilter !== "all" && !s.eventTypes.includes(eventFilter)) return false;
-      if (s.priceNum < priceRange[0] || s.priceNum > priceRange[1]) return false;
+      if (capacityFilter === "small" && (s.capacity_num || 0) > 10) return false;
+      if (capacityFilter === "medium" && ((s.capacity_num || 0) <= 10 || (s.capacity_num || 0) > 20)) return false;
+      if (capacityFilter === "large" && (s.capacity_num || 0) <= 20) return false;
+      if (eventFilter !== "all" && !(s.event_types || []).includes(eventFilter)) return false;
+      if ((s.price_num || 0) < priceRange[0] || (s.price_num || 0) > priceRange[1]) return false;
       return true;
     });
   }, [capacityFilter, eventFilter, priceRange]);

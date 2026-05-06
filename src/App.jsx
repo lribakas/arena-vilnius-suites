@@ -11,6 +11,12 @@ import Suites from '@/pages/Suites';
 import SuiteDetail from '@/pages/SuiteDetail';
 import Events from '@/pages/Events';
 import Contact from '@/pages/Contact';
+import AdminLayout from '@/pages/admin/AdminLayout';
+import AdminOverview from '@/pages/admin/AdminOverview';
+import AdminSuites from '@/pages/admin/AdminSuites';
+import AdminEvents from '@/pages/admin/AdminEvents';
+import AdminInquiries from '@/pages/admin/AdminInquiries';
+import AdminSettings from '@/pages/admin/AdminSettings';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -51,6 +57,15 @@ const AuthenticatedApp = () => {
         <Route path="/suites/:id" element={<SuiteDetail />} />
         <Route path="/events" element={<Events />} />
         <Route path="/contact" element={<Contact />} />
+      </Route>
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<AdminOverview />} />
+        <Route path="suites" element={<AdminSuites />} />
+        <Route path="suites/new" element={<AdminSuites />} />
+        <Route path="events" element={<AdminEvents />} />
+        <Route path="events/new" element={<AdminEvents />} />
+        <Route path="inquiries" element={<AdminInquiries />} />
+        <Route path="settings" element={<AdminSettings />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

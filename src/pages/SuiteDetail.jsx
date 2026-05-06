@@ -2,11 +2,16 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Users, Check, ArrowLeft, ArrowRight, Car, UtensilsCrossed, DoorOpen, Wifi } from "lucide-react";
-import { suites } from "@/lib/mockData";
+import { useQuery } from "@tanstack/react-query";
+import { base44 } from "@/api/base44Client";
 import { images } from "@/lib/images";
 
 export default function SuiteDetail() {
   const { id } = useParams();
+  const { data: suites = [] } = useQuery({
+    queryKey: ["suites-public"],
+    queryFn: () => base44.entities.Suite.filter({ status: "published" }),
+  });
   const suite = suites.find((s) => s.id === id);
 
   if (!suite) {
@@ -22,7 +27,7 @@ export default function SuiteDetail() {
     <div className="bg-[#0a0a0a] min-h-screen pt-16 pb-28">
       {/* Hero */}
       <div className="relative h-[52vh] min-h-[420px] overflow-hidden">
-        <img src={images.suites[suite.id]} alt={suite.name} className="w-full h-full object-cover opacity-50" />
+        <img src={suite.image || images.suites[suite.id] || images.hero} alt={suite.name} className="w-full h-full object-cover opacity-50" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/50 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-white/[0.06]" />
@@ -53,9 +58,9 @@ export default function SuiteDetail() {
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7, ease: [0.16,1,0.3,1] }}>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-[1px] bg-white/[0.05]">
                 {[
-                  { icon: Users, label: "Capacity", value: suite.capacity },
-                  { icon: Car, label: "Parking", value: "VIP" },
-                  { icon: DoorOpen, label: "Entrance", value: "Private" },
+                  { icon: Users, label: "Capacity", value: suite.capacity || "—" },
+                  { icon: Car, label: "Parking", value: suite.parking || "VIP" },
+                  { icon: DoorOpen, label: "Entrance", value: suite.entrance || "Private" },
                   { icon: Wifi, label: "WiFi", value: "Included" },
                 ].map(({ icon: Icon, label, value }) => (
                   <div key={label} className="bg-[#0a0a0a] p-6 text-center">
@@ -117,9 +122,9 @@ export default function SuiteDetail() {
 
                   <div className="space-y-4 mb-8 border-y border-white/[0.06] py-6">
                     {[
-                      { label: "Capacity", value: suite.capacity },
-                      { label: "Catering", value: "Included" },
-                      { label: "Parking", value: "VIP Included" },
+                      { label: "Capacity", value: suite.capacity || "—" },
+                      { label: "Catering", value: suite.catering ? "Included" : "Available" },
+                      { label: "Parking", value: suite.parking || "VIP Included" },
                     ].map(item => (
                       <div key={item.label} className="flex justify-between text-sm">
                         <span className="text-white/28 font-light">{item.label}</span>
@@ -132,7 +137,7 @@ export default function SuiteDetail() {
                     to="/contact"
                     className="group flex items-center justify-center gap-3 w-full bg-white text-[#0a0a0a] py-4 font-heading text-xs font-bold tracking-[0.2em] uppercase hover:bg-white/90 transition-all duration-300"
                   >
-                    Request Proposal
+                    {suite.cta_text || "Request Proposal"}
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
                   </Link>
 

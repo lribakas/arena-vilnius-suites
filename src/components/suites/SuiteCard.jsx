@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Users, ArrowRight } from "lucide-react";
 import { images } from "@/lib/images";
+const fallbackImg = images.suites.presidential;
 
 export default function SuiteCard({ suite, index }) {
   return (
@@ -15,7 +16,7 @@ export default function SuiteCard({ suite, index }) {
       <Link to={`/suites/${suite.id}`} className="group block bg-[#0a0a0a] overflow-hidden">
         <div className="relative h-52 overflow-hidden">
           <img
-            src={images.suites[suite.id]}
+            src={suite.image || fallbackImg}
             alt={suite.name}
             className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-[1.03] transition-all duration-700 ease-out"
           />
@@ -35,6 +36,7 @@ export default function SuiteCard({ suite, index }) {
             <div className="flex items-center gap-2 text-white/28 text-xs font-light">
               <Users className="w-3.5 h-3.5" />
               <span>{suite.capacity}</span>
+              {suite.price && <span className="ml-2 text-white/20">· {suite.price}</span>}
             </div>
             <div className="flex items-center gap-1.5 font-heading text-[10px] tracking-[0.15em] uppercase text-white/25 group-hover:text-white/60 group-hover:gap-2.5 transition-all duration-300">
               <span>View</span>
