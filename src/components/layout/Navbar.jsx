@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { images } from "@/lib/images";
 
 const navLinks = [
   { label: "Suites", path: "/suites" },
@@ -28,17 +29,13 @@ export default function Navbar() {
     }`}>
       <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
 
-        {/* Logo wordmark — mirrors Arena Vilnius brand exactly */}
-        <Link to="/" className="flex flex-col items-start leading-none select-none group">
-          <span className="font-heading text-[9px] tracking-[0.55em] text-white/40 uppercase font-medium transition-colors duration-300 group-hover:text-white/60">
-            Arena
-          </span>
-          <span className="font-heading text-[22px] font-bold tracking-tight text-white leading-none">
-            VILNIUS
-          </span>
-          <span className="font-heading text-[8px] tracking-[0.35em] text-white/30 uppercase font-normal mt-[2px] transition-colors duration-300 group-hover:text-white/50">
-            Suites
-          </span>
+        {/* Official Arena Vilnius logo asset */}
+        <Link to="/" className="select-none group">
+          <img
+            src={images.logoWhite}
+            alt="Arena Vilnius"
+            className="h-8 w-auto opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+          />
         </Link>
 
         {/* Desktop */}

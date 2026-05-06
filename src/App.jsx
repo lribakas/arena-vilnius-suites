@@ -20,11 +20,11 @@ const AuthenticatedApp = () => {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-[#0a0a0a]">
         <div className="flex flex-col items-center gap-8">
-          <div className="flex flex-col leading-none items-center">
-            <span className="font-heading text-[9px] tracking-[0.55em] text-white/25 uppercase">Arena</span>
-            <span className="font-heading text-3xl font-bold tracking-tight text-white">VILNIUS</span>
-            <span className="font-heading text-[8px] tracking-[0.3em] text-white/20 uppercase mt-0.5">Suites</span>
-          </div>
+          <img
+            src="https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/c783c0f63_Arena-Vilnius-baltas.png"
+            alt="Arena Vilnius"
+            className="h-10 w-auto opacity-70"
+          />
           <div className="w-5 h-5 border border-white/10 border-t-white/40 rounded-full animate-spin" />
         </div>
       </div>

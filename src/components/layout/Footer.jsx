@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail } from "lucide-react";
+import { images } from "@/lib/images";
 
 export default function Footer() {
   return (
@@ -8,13 +9,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-8 pt-16 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-white/[0.06]">
 
-          {/* Wordmark */}
+          {/* Logo */}
           <div className="md:col-span-1">
-            <div className="flex flex-col leading-none mb-8">
-              <span className="font-heading text-[9px] tracking-[0.5em] text-white/25 uppercase">Arena</span>
-              <span className="font-heading text-2xl font-bold tracking-tight text-white">VILNIUS</span>
-              <span className="font-heading text-[8px] tracking-[0.3em] text-white/25 uppercase mt-0.5">Suites</span>
-            </div>
+            <Link to="/" className="block mb-8">
+              <img src={images.logoWhite} alt="Arena Vilnius" className="h-9 w-auto opacity-60" />
+            </Link>
             <p className="text-white/30 text-sm leading-relaxed font-light">
               Premium hospitality experiences at Lithuania's premier arena.
             </p>

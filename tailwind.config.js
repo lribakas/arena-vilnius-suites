@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['var(--font-heading)'],
-        body: ['var(--font-body)'],
+        heading: ['Nunito', 'var(--font-heading)', 'sans-serif'],
+        body: ['Inter', 'var(--font-body)', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',

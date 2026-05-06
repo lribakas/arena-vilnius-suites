@@ -35,18 +35,17 @@ export default function HeroSection() {
               Premium Hospitality — Vilnius Arena
             </motion.p>
 
-            {/* Giant wordmark headline */}
+            {/* Official logo + Suites label */}
             <motion.div
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.1, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="flex flex-col leading-none mb-3">
-                <span className="font-heading text-[10px] tracking-[0.6em] text-white/25 uppercase font-normal">Arena</span>
-                <h1 className="font-heading font-bold text-[clamp(4rem,12vw,9rem)] text-white tracking-tight leading-none">
-                  VILNIUS
-                </h1>
-              </div>
+              <img
+                src={images.logoWhite}
+                alt="Arena Vilnius"
+                className="h-20 md:h-28 lg:h-36 w-auto mb-4"
+              />
               <p className="font-heading text-[9px] tracking-[0.45em] text-white/25 uppercase mt-2 font-light">
                 Suites & VIP Experiences
               </p>

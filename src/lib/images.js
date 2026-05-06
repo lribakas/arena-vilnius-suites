@@ -14,5 +14,6 @@ export const images = {
     shows: "https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/9b296c8e9_generated_7a290a5b.png",
     corporate: "https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/8ba15dd41_generated_ff0b948f.png",
   },
-  logo: "https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/84a1c3c16_generated_image.png",
+  logoWhite: "https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/c783c0f63_Arena-Vilnius-baltas.png",
+  logoBlack: "https://media.base44.com/images/public/69fae78c0003e2cd0ac3e480/9dbdac5f5_Arena-Vilnius-juodas.png",
 };
