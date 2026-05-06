@@ -1,107 +1,92 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { images } from "@/lib/images";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen min-h-[720px] flex items-end overflow-hidden bg-[#0a0a0a]">
       {/* Background image */}
       <div className="absolute inset-0">
         <img
           src={images.hero}
-          alt="Arena Vilnius VIP Suites"
-          className="w-full h-full object-cover"
+          alt="Arena Vilnius"
+          className="w-full h-full object-cover opacity-40"
         />
-        {/* Cinematic overlays */}
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/30" />
-        {/* Subtle red glow at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+        {/* Layered overlays for cinematic depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/70 via-transparent to-[#0a0a0a]/20" />
+        {/* Very subtle vignette */}
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(10,10,10,0.5) 100%)" }} />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex items-center justify-center gap-3 mb-8"
-        >
-          <div className="w-10 h-px bg-primary" />
-          <span className="text-primary text-xs font-heading font-semibold uppercase tracking-[0.4em]">
-            Premium Hospitality
-          </span>
-          <div className="w-10 h-px bg-primary" />
-        </motion.div>
+      {/* Bottom content — architectural layout */}
+      <div className="relative z-10 w-full pb-20 md:pb-28">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="max-w-3xl">
+            {/* Eyebrow */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="font-heading text-[9px] tracking-[0.5em] uppercase text-white/35 mb-8 font-medium"
+            >
+              Premium Hospitality — Vilnius Arena
+            </motion.p>
 
-        {/* Main headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
-        >
-          <div className="flex flex-col items-center leading-none mb-6">
-            <span className="font-heading text-[11px] md:text-xs tracking-[0.5em] text-white/50 uppercase font-medium mb-1">Arena</span>
-            <h1 className="font-heading font-bold text-6xl md:text-8xl lg:text-[10rem] text-white tracking-tight leading-none">
-              VILNIUS
-            </h1>
-            <span className="font-heading text-xs md:text-sm tracking-[0.5em] text-primary uppercase font-semibold mt-3">
-              Suites & VIP Experiences
-            </span>
+            {/* Giant wordmark headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="flex flex-col leading-none mb-3">
+                <span className="font-heading text-[10px] tracking-[0.6em] text-white/25 uppercase font-normal">Arena</span>
+                <h1 className="font-heading font-bold text-[clamp(4rem,12vw,9rem)] text-white tracking-tight leading-none">
+                  VILNIUS
+                </h1>
+              </div>
+              <p className="font-heading text-[9px] tracking-[0.45em] text-white/25 uppercase mt-2 font-light">
+                Suites & VIP Experiences
+              </p>
+            </motion.div>
+
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="text-white/45 text-[15px] md:text-base leading-relaxed max-w-lg mt-8 mb-10 font-light"
+            >
+              Private suites, premium seating, and world-class hospitality
+              for concerts, sports, and corporate events.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col sm:flex-row items-start gap-4"
+            >
+              <Link
+                to="/suites"
+                className="group inline-flex items-center gap-3 bg-white text-[#0a0a0a] px-8 py-4 font-heading text-xs font-bold tracking-[0.2em] uppercase hover:bg-white/90 transition-all duration-400"
+              >
+                Explore Suites
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-3 border border-white/15 text-white/60 px-8 py-4 font-heading text-xs font-medium tracking-[0.2em] uppercase hover:border-white/35 hover:text-white/90 transition-all duration-400"
+              >
+                Request Proposal
+              </Link>
+            </motion.div>
           </div>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.35 }}
-          className="text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10"
-        >
-          Private suites, premium seating, and world-class hospitality
-          for concerts, sports events, and corporate experiences.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Link
-            to="/suites"
-            className="group flex items-center gap-3 bg-primary text-white px-8 py-4 text-sm font-heading font-semibold tracking-widest uppercase hover:bg-primary/90 transition-all duration-300"
-            style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
-          >
-            Explore Suites
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-          <Link
-            to="/contact"
-            className="flex items-center gap-2 border border-white/20 text-white/80 px-8 py-4 text-sm font-heading font-semibold tracking-widest uppercase hover:border-white/40 hover:text-white transition-all duration-300"
-          >
-            Request Proposal
-          </Link>
-        </motion.div>
+        </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        >
-          <ChevronDown className="w-5 h-5 text-white/30" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

@@ -5,25 +5,21 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { benefits } from "@/lib/mockData";
 
 const iconMap = {
-  car: Car,
-  utensils: UtensilsCrossed,
-  concierge: UserCheck,
-  palette: Palette,
-  monitor: Monitor,
-  package: Package,
+  car: Car, utensils: UtensilsCrossed, concierge: UserCheck,
+  palette: Palette, monitor: Monitor, package: Package,
 };
 
 export default function BenefitsSection() {
   return (
-    <section className="py-28 px-6 bg-black">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-28 bg-[#0a0a0a]">
+      <div className="max-w-7xl mx-auto px-8">
         <SectionHeading
           label="Premium Benefits"
           title="Why Choose Us"
           subtitle="Every detail is designed to exceed expectations and deliver an extraordinary experience."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-white/[0.05]">
           {benefits.map((benefit, i) => {
             const Icon = iconMap[benefit.icon] || Package;
             return (
@@ -31,15 +27,13 @@ export default function BenefitsSection() {
                 key={benefit.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group bg-card p-8 hover:bg-white/[0.04] transition-all duration-500"
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.7, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                className="group bg-[#0a0a0a] p-9 hover:bg-[#0f0f0f] transition-all duration-500"
               >
-                <div className="w-10 h-10 border border-white/10 flex items-center justify-center mb-6 group-hover:border-primary/40 transition-colors">
-                  <Icon className="w-4 h-4 text-white/50 group-hover:text-primary transition-colors" />
-                </div>
-                <h3 className="font-heading font-bold text-white text-base mb-3">{benefit.title}</h3>
-                <p className="text-white/40 text-sm leading-relaxed">{benefit.description}</p>
+                <Icon className="w-4 h-4 text-white/20 mb-7 group-hover:text-white/50 transition-colors duration-400" />
+                <h3 className="font-heading font-semibold text-white text-[15px] tracking-tight mb-3">{benefit.title}</h3>
+                <p className="text-white/35 text-sm leading-relaxed font-light">{benefit.description}</p>
               </motion.div>
             );
           })}

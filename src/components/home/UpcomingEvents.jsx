@@ -11,71 +11,67 @@ export default function UpcomingEvents() {
   const featured = events.slice(0, 3);
 
   return (
-    <section className="py-28 px-6" style={{ background: "hsl(0 0% 6%)" }}>
-      <div className="max-w-7xl mx-auto">
+    <section className="py-28" style={{ background: "#0d0d0d" }}>
+      <div className="max-w-7xl mx-auto px-8">
         <SectionHeading
           label="Upcoming Events"
           title="What's Coming"
           subtitle="Discover the biggest events at Arena Vilnius and secure your premium hospitality experience."
         />
 
-        <div className="space-y-px bg-white/5">
+        <div className="divide-y divide-white/[0.05]">
           {featured.map((event, i) => (
             <motion.div
               key={event.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.7, delay: i * 0.09, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
                 to="/events"
-                className="group flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 bg-card px-6 py-5 hover:bg-white/[0.04] transition-all duration-300"
+                className="group flex flex-col sm:flex-row items-start sm:items-center gap-5 py-6 hover:bg-white/[0.018] transition-all duration-500 px-5 -mx-5"
               >
-                <div className="relative w-full sm:w-40 h-28 sm:h-20 flex-shrink-0 overflow-hidden">
+                {/* Image */}
+                <div className="relative w-full sm:w-36 h-24 flex-shrink-0 overflow-hidden">
                   <img
                     src={images.events[event.category]}
                     alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-[1.04] transition-all duration-700 ease-out"
                   />
-                  <div className="absolute inset-y-0 left-0 w-0.5 bg-primary" />
+                  <div className="absolute inset-0 bg-[#0d0d0d]/30" />
                 </div>
 
+                {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex flex-wrap items-center gap-3 mb-1.5">
-                    <span className="text-primary text-[10px] font-heading font-semibold uppercase tracking-[0.25em]">
-                      {event.category}
-                    </span>
-                    <span className="text-white/20 text-xs">·</span>
-                    <span className="text-white/40 text-xs">{event.availableSuites.length} suites available</span>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="font-heading text-[9px] tracking-[0.3em] uppercase text-white/25 font-medium">{event.category}</span>
+                    <span className="w-px h-3 bg-white/10" />
+                    <span className="font-heading text-[9px] tracking-[0.2em] uppercase text-white/18">{event.availableSuites.length} suites</span>
                   </div>
-                  <h3 className="font-heading font-bold text-white text-base truncate">{event.title}</h3>
+                  <h3 className="font-heading font-semibold text-white text-[15px] tracking-tight truncate">{event.title}</h3>
                 </div>
 
+                {/* Date + arrow */}
                 <div className="flex items-center gap-6 flex-shrink-0">
-                  <div className="flex items-center gap-2 text-white/40 text-sm">
+                  <div className="flex items-center gap-2 text-white/25 text-xs font-light">
                     <Calendar className="w-3.5 h-3.5" />
                     <span>{format(new Date(event.date), "MMM d, yyyy")}</span>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight className="w-4 h-4 text-white/15 group-hover:text-white/60 group-hover:translate-x-1 transition-all duration-300" />
                 </div>
               </Link>
             </motion.div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="mt-10">
           <Link
             to="/events"
-            className="inline-flex items-center gap-2 border border-white/10 text-white/60 text-sm font-heading font-semibold uppercase tracking-widest px-8 py-3 hover:border-white/30 hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-3 border border-white/10 text-white/40 font-heading text-[10px] tracking-[0.2em] uppercase px-8 py-3.5 hover:border-white/25 hover:text-white/70 transition-all duration-400"
           >
             Browse All Events
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </motion.div>
       </div>

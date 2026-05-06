@@ -18,13 +18,14 @@ const AuthenticatedApp = () => {
   // Show loading spinner while checking app public settings or auth
   if (isLoadingPublicSettings || isLoadingAuth) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-black">
-        <div className="flex flex-col items-center gap-6">
+      <div className="fixed inset-0 flex items-center justify-center bg-[#0a0a0a]">
+        <div className="flex flex-col items-center gap-8">
           <div className="flex flex-col leading-none items-center">
-            <span className="font-heading text-[10px] tracking-[0.4em] text-white/40 uppercase">Arena</span>
+            <span className="font-heading text-[9px] tracking-[0.55em] text-white/25 uppercase">Arena</span>
             <span className="font-heading text-3xl font-bold tracking-tight text-white">VILNIUS</span>
+            <span className="font-heading text-[8px] tracking-[0.3em] text-white/20 uppercase mt-0.5">Suites</span>
           </div>
-          <div className="w-6 h-6 border-2 border-white/10 border-t-red-600 rounded-full animate-spin" />
+          <div className="w-5 h-5 border border-white/10 border-t-white/40 rounded-full animate-spin" />
         </div>
       </div>
     );

@@ -6,52 +6,45 @@ import { images } from "@/lib/images";
 
 export default function CTASection() {
   return (
-    <section className="relative py-28 px-6 overflow-hidden" style={{ background: "hsl(0 0% 6%)" }}>
-      {/* Background image with heavy overlay */}
+    <section className="relative py-36 overflow-hidden" style={{ background: "#0d0d0d" }}>
+      {/* Ambient background */}
       <div className="absolute inset-0">
-        <img src={images.hero} alt="" className="w-full h-full object-cover opacity-15" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+        <img src={images.hero} alt="" className="w-full h-full object-cover opacity-[0.08]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-[#0d0d0d]/60 to-[#0d0d0d]" />
       </div>
-      {/* Red glow */}
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
-      <div className="relative max-w-3xl mx-auto text-center">
+      {/* Horizontal rules */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-white/[0.06]" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-white/[0.06]" />
+
+      <div className="relative max-w-3xl mx-auto px-8 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-8 h-px bg-primary" />
-            <p className="text-primary text-xs font-heading font-semibold uppercase tracking-[0.3em]">
-              Ready to Experience?
-            </p>
-            <div className="w-8 h-px bg-primary" />
-          </div>
-
-          <h2 className="font-heading font-bold text-4xl md:text-6xl text-white mb-6 tracking-tight leading-tight">
-            Your Next Unforgettable<br />
-            <span className="text-gradient-red">Experience Awaits</span>
+          <p className="font-heading text-[9px] tracking-[0.5em] uppercase text-white/25 mb-8 font-medium">
+            Ready to Experience?
+          </p>
+          <h2 className="font-heading font-bold text-4xl md:text-6xl text-white tracking-tight leading-[1.05] mb-6">
+            Your Next Unforgettable<br />Experience Awaits
           </h2>
-
-          <p className="text-white/50 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+          <p className="text-white/38 text-[15px] max-w-sm mx-auto mb-12 font-light leading-relaxed">
             Contact our hospitality team to discover the perfect suite for your next event.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/contact"
-              className="group flex items-center gap-3 bg-primary text-white px-10 py-4 text-sm font-heading font-semibold tracking-widest uppercase hover:bg-primary/90 transition-all duration-300"
-              style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
+              className="group inline-flex items-center gap-3 bg-white text-[#0a0a0a] px-10 py-4 font-heading text-xs font-bold tracking-[0.2em] uppercase hover:bg-white/90 transition-all duration-300"
             >
               Request Proposal
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
             <Link
               to="/suites"
-              className="flex items-center gap-2 border border-white/15 text-white/60 px-10 py-4 text-sm font-heading font-semibold tracking-widest uppercase hover:border-white/30 hover:text-white transition-all duration-300"
+              className="inline-flex items-center gap-3 border border-white/12 text-white/40 px-10 py-4 font-heading text-xs font-medium tracking-[0.2em] uppercase hover:border-white/28 hover:text-white/70 transition-all duration-400"
             >
               Explore Suites
             </Link>
