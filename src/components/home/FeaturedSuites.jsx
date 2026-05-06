@@ -35,7 +35,7 @@ export default function FeaturedSuites() {
               <Link to={`/suites/${suite.id}`} className="group block bg-[#0a0a0a] overflow-hidden">
                 <div className="relative h-52 overflow-hidden">
                   <img
-                    src={images.suites[suite.id]}
+                    src={suite.image || images.suites[suite.id] || images.hero}
                     alt={suite.name}
                     className="w-full h-full object-cover opacity-75 group-hover:opacity-90 group-hover:scale-[1.03] transition-all duration-700 ease-out"
                   />
