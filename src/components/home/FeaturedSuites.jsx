@@ -18,9 +18,9 @@ export default function FeaturedSuites() {
     <section className="py-28 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-8">
         <SectionHeading
-          label="Our Suites"
-          title="Exceptional Spaces"
-          subtitle="Each suite delivers an unmatched hospitality experience with breathtaking arena views and impeccable service."
+          label="VIP Patirtis"
+          title="Išskirtinės erdvės"
+          subtitle="Naudokitės atskiru įėjimu į areną skirtu tik ložių lankytojams, išskirtinėmis požeminio parkavimo vietomis bei galimybe pratęsti vakarą ložėje renginiui pasibaigus."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/[0.05]">
