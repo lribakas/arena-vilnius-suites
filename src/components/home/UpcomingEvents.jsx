@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
 import { format } from "date-fns";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { events } from "@/lib/mockData";
+import { useQuery } from "@tanstack/react-query";
+import { base44 } from "@/api/base44Client";
 import { images } from "@/lib/images";
 
 export default function UpcomingEvents() {

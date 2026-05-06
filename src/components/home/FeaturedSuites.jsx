@@ -3,11 +3,16 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Users } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { suites } from "@/lib/mockData";
+import { useQuery } from "@tanstack/react-query";
+import { base44 } from "@/api/base44Client";
 import { images } from "@/lib/images";
 
 export default function FeaturedSuites() {
-  const featured = suites.slice(0, 3);
+  const { data: allSuites = [] } = useQuery({
+    queryKey: ["suites-public"],
+    queryFn: () => base44.entities.Suite.filter({ status: "published" }, "display_order", 3),
+  });
+  const featured = allSuites.slice(0, 3);
 
   return (
     <section className="py-28 bg-[#0a0a0a]">
