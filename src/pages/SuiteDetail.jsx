@@ -103,15 +103,39 @@ export default function SuiteDetail() {
             </motion.div>
 
             {/* Catering */}
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.7, ease: [0.16,1,0.3,1] }}>
-              <p className="font-heading text-[9px] tracking-[0.4em] uppercase text-white/25 mb-5">Catering</p>
-              <div className="border-l-2 border-white/10 pl-6 py-1">
-                <div className="flex items-start gap-3">
-                  <UtensilsCrossed className="w-3.5 h-3.5 text-white/20 mt-0.5 flex-shrink-0" />
-                  <p className="text-white/45 text-sm font-light leading-relaxed">{suite.catering}</p>
+            {suite.catering && (
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.7, ease: [0.16,1,0.3,1] }}>
+                <p className="font-heading text-[9px] tracking-[0.4em] uppercase text-white/25 mb-5">Catering</p>
+                <div className="border-l-2 border-white/10 pl-6 py-1">
+                  <div className="flex items-start gap-3">
+                    <UtensilsCrossed className="w-3.5 h-3.5 text-white/20 mt-0.5 flex-shrink-0" />
+                    <p className="text-white/45 text-sm font-light leading-relaxed">{suite.catering}</p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
+
+            {/* Gallery */}
+            {(suite.gallery || []).length > 0 && (
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.7, ease: [0.16,1,0.3,1] }}>
+                <p className="font-heading text-[9px] tracking-[0.4em] uppercase text-white/25 mb-6">Gallery</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-[1px] bg-white/[0.04]">
+                  {suite.gallery.map((url, i) => (
+                    <div key={i} className="aspect-video overflow-hidden">
+                      <img src={url} alt={`Gallery ${i + 1}`} className="w-full h-full object-cover opacity-70 hover:opacity-90 hover:scale-[1.03] transition-all duration-500" />
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Floor Plan */}
+            {suite.floor_plan && (
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.7, ease: [0.16,1,0.3,1] }}>
+                <p className="font-heading text-[9px] tracking-[0.4em] uppercase text-white/25 mb-6">Floor Plan</p>
+                <img src={suite.floor_plan} alt="Floor plan" className="w-full opacity-70 border border-white/[0.06]" />
+              </motion.div>
+            )}
           </div>
 
           {/* Booking card */}

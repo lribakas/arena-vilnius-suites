@@ -25,6 +25,10 @@
       },
       "description": "Gallery image URLs"
     },
+    "floor_plan": {
+      "type": "string",
+      "description": "Floor plan image URL"
+    },
     "capacity": {
       "type": "string",
       "description": "Capacity label e.g. 20-30 guests"
@@ -96,34 +100,5 @@
   },
   "required": [
     "name"
-  ],
-  "rls": {
-    "create": {
-      "user_condition": {
-        "role": "admin"
-      }
-    },
-    "read": {
-      "$or": [
-        {
-          "data.status": "published"
-        },
-        {
-          "user_condition": {
-            "role": "admin"
-          }
-        }
-      ]
-    },
-    "update": {
-      "user_condition": {
-        "role": "admin"
-      }
-    },
-    "delete": {
-      "user_condition": {
-        "role": "admin"
-      }
-    }
-  }
+  ]
 }

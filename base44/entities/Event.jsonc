@@ -18,6 +18,13 @@
       "type": "string",
       "description": "Event image URL"
     },
+    "gallery": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional image URLs"
+    },
     "date": {
       "type": "string",
       "format": "date",
@@ -69,34 +76,5 @@
   },
   "required": [
     "title"
-  ],
-  "rls": {
-    "create": {
-      "user_condition": {
-        "role": "admin"
-      }
-    },
-    "read": {
-      "$or": [
-        {
-          "data.status": "published"
-        },
-        {
-          "user_condition": {
-            "role": "admin"
-          }
-        }
-      ]
-    },
-    "update": {
-      "user_condition": {
-        "role": "admin"
-      }
-    },
-    "delete": {
-      "user_condition": {
-        "role": "admin"
-      }
-    }
-  }
+  ]
 }

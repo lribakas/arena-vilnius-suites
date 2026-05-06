@@ -3,7 +3,9 @@ import { base44 } from "@/api/base44Client";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Upload, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import ImageUploader from "./ImageUploader";
+import GalleryUploader from "./GalleryUploader";
 
 const CATEGORIES = ["basketball", "concerts", "shows", "corporate", "other"];
 
@@ -25,18 +27,8 @@ export default function EventForm({ event, suites = [], onSave, onCancel }) {
     ...event,
   });
   const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
 
   const set = (k, v) => setForm(p => ({ ...p, [k]: v }));
-
-  const handleImageUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    set("image", file_url);
-    setUploading(false);
-  };
 
   const toggleSuite = (id) => {
     set("available_suites", form.available_suites.includes(id)
@@ -110,22 +102,8 @@ export default function EventForm({ event, suites = [], onSave, onCancel }) {
           </FIELD>
         )}
 
-        {/* Image */}
-        <FIELD label="Event Image">
-          <div className="flex gap-3 items-start">
-            <div className="flex-1">
-              <Input value={form.image} onChange={e => set("image", e.target.value)} placeholder="Image URL or upload below" className={inputCls} />
-            </div>
-            <label className="cursor-pointer border border-white/[0.08] px-3 py-2 text-white/30 hover:text-white/70 transition-colors flex items-center gap-2">
-              {uploading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
-              <span className="font-heading text-[9px] tracking-[0.15em] uppercase">Upload</span>
-              <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
-            </label>
-          </div>
-          {form.image && (
-            <img src={form.image} alt="" className="mt-3 h-24 w-auto object-cover opacity-70 border border-white/[0.06]" />
-          )}
-        </FIELD>
+        <ImageUploader label="Event Image" value={form.image} onChange={v => set("image", v)} />
+        <GalleryUploader label="Additional Images (Optional)" value={form.gallery || []} onChange={v => set("gallery", v)} />
 
         {/* Status */}
         <FIELD label="Status">
