@@ -80,7 +80,7 @@ export default function SuiteDetail() {
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.7, ease: [0.16,1,0.3,1] }}>
               <p className="font-heading text-[9px] tracking-[0.4em] uppercase text-white/25 mb-6">Features & Amenities</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-[1px] bg-white/[0.04]">
-                {suite.features.map((f) => (
+                {(suite.features || []).map((f) => (
                   <div key={f} className="flex items-center gap-3 bg-[#0a0a0a] px-5 py-4">
                     <Check className="w-3 h-3 text-white/25 flex-shrink-0" />
                     <span className="text-white/50 text-sm font-light">{f}</span>
@@ -93,7 +93,7 @@ export default function SuiteDetail() {
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7, ease: [0.16,1,0.3,1] }}>
               <p className="font-heading text-[9px] tracking-[0.4em] uppercase text-white/25 mb-6">What's Included</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {suite.included.map((item) => (
+                {(suite.included || []).map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <div className="w-1 h-1 bg-white/25 flex-shrink-0" />
                     <span className="text-white/45 text-sm font-light">{item}</span>
