@@ -79,7 +79,7 @@ export default function AdminEvents() {
       ) : (
         <div className="bg-[#0d0d0d] border border-white/[0.06]">
           <div className="px-6 py-3 border-b border-white/[0.06] grid grid-cols-12 gap-4">
-            {["Event", "Category", "Date", "Price", "Status", "Order", "Actions"].map(h => (
+            {["Event", "ID", "Date", "Price", "Status", "Order", "Actions"].map(h => (
               <p key={h} className="font-heading text-[8px] tracking-[0.3em] uppercase text-white/20 col-span-2 first:col-span-3">{h}</p>
             ))}
           </div>
@@ -94,7 +94,7 @@ export default function AdminEvents() {
                   {event.image && <img src={event.image} alt="" className="w-10 h-10 object-cover opacity-60 flex-shrink-0" />}
                   <p className="text-white/70 text-sm font-medium truncate">{event.title}</p>
                 </div>
-                <p className="col-span-2 text-white/30 text-xs capitalize">{event.category}</p>
+                <p className="col-span-2 text-white/20 text-[10px] font-mono truncate cursor-pointer hover:text-white/50 transition-colors" title={event.id} onClick={() => navigator.clipboard.writeText(event.id)}>{event.id?.slice(0, 8)}…</p>
                 <p className="col-span-2 text-white/30 text-xs font-light">
                   {event.date ? format(new Date(event.date), "MMM d, yyyy") : "—"}
                 </p>

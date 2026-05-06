@@ -73,7 +73,7 @@ export default function AdminSuites() {
       ) : (
         <div className="bg-[#0d0d0d] border border-white/[0.06]">
           <div className="px-6 py-3 border-b border-white/[0.06] grid grid-cols-12 gap-4">
-            {["Suite", "Tagline", "Capacity", "Price", "Status", "Order", "Actions"].map(h => (
+            {["Suite", "ID", "Capacity", "Price", "Status", "Order", "Actions"].map(h => (
               <p key={h} className="font-heading text-[8px] tracking-[0.3em] uppercase text-white/20 col-span-2 first:col-span-3">{h}</p>
             ))}
           </div>
@@ -88,7 +88,7 @@ export default function AdminSuites() {
                   {suite.image && <img src={suite.image} alt="" className="w-10 h-10 object-cover opacity-60 flex-shrink-0" />}
                   <p className="text-white/70 text-sm font-medium truncate">{suite.name}</p>
                 </div>
-                <p className="col-span-2 text-white/30 text-xs font-light truncate">{suite.tagline}</p>
+                <p className="col-span-2 text-white/20 text-[10px] font-mono truncate cursor-pointer hover:text-white/50 transition-colors" title={suite.id} onClick={() => navigator.clipboard.writeText(suite.id)}>{suite.id?.slice(0, 8)}…</p>
                 <p className="col-span-2 text-white/30 text-xs font-light">{suite.capacity || "—"}</p>
                 <p className="col-span-2 text-white/30 text-xs font-light">{suite.price || "—"}</p>
                 <div className="col-span-2">
